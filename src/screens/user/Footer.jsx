@@ -1,8 +1,7 @@
 import { FaFacebook, FaPinterest, FaTelegram } from "react-icons/fa";
 import { FaSquareTwitter } from "react-icons/fa6";
 import { Link } from "react-router-dom";
-import logo from "../../assets/trade_logo.png";
-import logo2 from "../../assets/rade.png";
+import logo from "../../assets/logo.png";
 import {
   FaFacebookF,
   FaInstagram,
@@ -17,9 +16,8 @@ export default function Footer() {
       <div className="mx-auto flex flex-col gap-10 md:flex-row md:justify-between md:items-start">
         {/* Company */}
         <div className="mb-6 md:mb-0">
-          <div className="flex items-center w-1/3 mb-5"  >
-            <img src={logo} alt="T_image" className="w-[5rem] absolute" />
-            <img src={logo2} alt="Rade" className="w-[5rem] ml-12" />
+          <div className="flex items-center w-1/3 my-5"  >
+            <img src={logo} alt="T_image" className="w-[12rem] absolute" />
           </div>
 
           <p className="lg:w-[25vw] text-start text-sm sm:text-base">

@@ -8,8 +8,7 @@ import { AuthenticatedRoutes } from "../../constants/Routes";
 import { RiLogoutCircleRLine } from "react-icons/ri";
 import { Accordion } from "react-bootstrap";
 import { FaCaretRight } from "react-icons/fa";
-import logo from "../../assets/trade_logo.png";
-import logo2 from "../../assets/rade.png";
+import logo from "../../assets/logo.png";
 
 const Sidebar = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
@@ -79,11 +78,10 @@ const Sidebar = () => {
       <nav className="nav">
         <div>
           <Link to={AuthenticatedRoutes.USER_DASHBOARD} className="nav-logo">
-           
-            <div className="flex items-center w-1/3 mt-10">
-                      <img src={logo} alt="T_image" className="w-[6rem] " />
-                      <img src={logo2} alt="Rade" className="w-64 ml-[-2rem] mt-4 " />
-                    </div>
+            <div className="flex items-center mt-10">
+              <img src={logo} alt="T_image" className="w-[3rem] md:w-[6rem]" />
+              
+            </div>
           </Link>
 
           <div className="nav-toggle" id="nav-toggle" onClick={toggleSidebar}>
@@ -109,7 +107,9 @@ const Sidebar = () => {
                           }}
                         >
                           {item?.icon}
-                          {item?.name}
+                          <span className={`${!isSidebarOpen ? "hidden" : ""}`}>
+                            {item?.name}
+                          </span>
                         </Accordion.Header>
                         <Accordion.Body>
                           <ul className="nested-options">
@@ -123,7 +123,13 @@ const Sidebar = () => {
                                   onClick={() => handleLinkClick(option?.id)}
                                 >
                                   <FaCaretRight />
-                                  <span>{option?.name}</span>
+                                  <span
+                                    className={`${
+                                      !isSidebarOpen ? "hidden" : ""
+                                    }`}
+                                  >
+                                    {option?.name}
+                                  </span>
                                 </Link>
                               </li>
                             ))}
@@ -141,7 +147,9 @@ const Sidebar = () => {
                     onClick={() => handleLinkClick(item?.id)}
                   >
                     {item?.icon}
-                    <span className="nav-text">
+                    <span
+                      className={`nav-text ${!isSidebarOpen ? "hidden" : ""}`}
+                    >
                       {item?.name.charAt(0)?.toUpperCase() +
                         item?.name.slice(1)}
                     </span>
@@ -158,7 +166,9 @@ const Sidebar = () => {
                 }}
               >
                 {<RiLogoutCircleRLine />}
-                <span className="nav-text">Logout</span>
+                <span className={`nav-text ${!isSidebarOpen ? "hidden" : ""}`}>
+                  Logout
+                </span>
               </Link>
             </li>
           </ul>

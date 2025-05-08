@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { FiMenu, FiX } from "react-icons/fi";
-import logo from "../../assets/trade_logo.png";
-import logo2 from "../../assets/rade.png";
+import logo from "../../assets/logo.png";
 
 import { useNavigate } from "react-router-dom";
 
@@ -21,8 +20,7 @@ const Navbar = () => {
       <div className="mx-auto flex items-center justify-between w-full px-4 py-4">
         {/* Logo */}
         <div className="flex items-center w-1/3">
-          <img src={logo} alt="T_image" className="w-[5rem] absolute" />
-          <img src={logo2} alt="Rade" className="w-[5rem] ml-12" />
+          <img src={logo} alt="T_image" className="w-[12rem] absolute" />
         </div>
 
         {/* Center Nav */}
