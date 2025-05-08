@@ -18,6 +18,7 @@ const AuthRegisterForm = () => {
     name: "",
     email: "",
     mobile: "",
+    countryCode: "+91", // ✅ Added countryCode
     password: "",
     referredBy: "",
     lastname: "",
@@ -45,11 +46,10 @@ const AuthRegisterForm = () => {
       const response = await registerUser({
         name: payload.name,
         lastname: payload.lastname,
-
-        mobile: payload.mobile,
+        mobile: `${payload.countryCode}${payload.mobile}`, // ✅ Send full number
         email: payload.email.trim().toLowerCase(),
         password: payload.password.trim(),
-        referredBy: payload.referredBy?.trim(), // Optional chaining if referredBy might be undefined
+        referredBy: payload.referredBy?.trim(),
       });
 
       // ✅ OTP sent message
@@ -62,7 +62,7 @@ const AuthRegisterForm = () => {
         showConfirmButton: false,
       });
 
-      // ✅ Loop until OTP is verified
+      // ✅ OTP loop
       let verified = false;
       while (!verified) {
         const { value: otp } = await Swal.fire({
@@ -88,13 +88,11 @@ const AuthRegisterForm = () => {
         }
 
         try {
-          // ✅ Try verifying OTP
           const otpResponse = await verifyOtp({
             email: payload.email,
             otp: otp,
           });
 
-          // ✅ Store token & role
           localStorage.setItem("token", otpResponse.token);
           localStorage.setItem("role", "User");
 
@@ -109,7 +107,6 @@ const AuthRegisterForm = () => {
           verified = true;
           handleNavigate();
         } catch (otpError) {
-          // ❌ Invalid OTP
           SwalError.fire({
             icon: "error",
             title: "Invalid OTP",
@@ -117,7 +114,6 @@ const AuthRegisterForm = () => {
               otpError?.response?.data?.message ||
               "OTP is incorrect, please try again.",
           });
-          // Loop continues
         }
       }
     } catch (error) {
@@ -136,8 +132,8 @@ const AuthRegisterForm = () => {
     <>
       {loading && <PageLoader />}
       <div className="mx-auto">
-      <h5
-          className="text-white text-center my-[3rem]  mx-auto text-[2.0945rem] font-semibold leading-none font-sofia"
+        <h5
+          className="text-white text-center my-[3rem] mx-auto text-[2.0945rem] font-semibold leading-none font-sofia"
           data-aos="fade-up"
         >
           Welcome to{" "}
@@ -145,10 +141,6 @@ const AuthRegisterForm = () => {
             1 Trade
           </span>
         </h5>
-        {/* <p data-aos="fade-up">
-          Today is a new day. It's your day. You shape it. Sign up to start
-          managing your projects.
-        </p> */}
 
         <div className="bg-[#1e1f26] mx-auto p-4 rounded-[2rem] mb-20">
           <p className="text-center text-[1.5rem]">Enter Account Details</p>
@@ -160,29 +152,41 @@ const AuthRegisterForm = () => {
                 setPayload((prev) => ({ ...prev, name: e.target.value }))
               }
               placeholder="Enter First Name"
-              // labelName="Name*"
             />
             <TextInput
               value={payload.lastname}
               onChange={(e) =>
-                setPayload((prev) => ({ ...prev, name: e.target.value }))
+                setPayload((prev) => ({ ...prev, lastname: e.target.value }))
               }
               placeholder="Enter Last Name"
-              // labelName=" Last Name*"
             />
-
             <TextInput
               value={payload.email}
               onChange={(e) =>
                 setPayload((prev) => ({ ...prev, email: e.target.value }))
               }
               placeholder="Enter Email"
-              // labelName="Email*"
             />
+
+            {/* ✅ Country Code Dropdown and Mobile Input */}
             <div className="flex gap-3 justify-center items-center bg-[#1e1f26] rounded-md">
-              <span className=" px-[1.2rem] py-[1rem] rounded-[1rem] text-[1.3rem] font-medium text-textPrimary bg-[#2a2b32]">
-                +91
-              </span>
+              <select
+                value={payload.countryCode}
+                onChange={(e) =>
+                  setPayload((prev) => ({
+                    ...prev,
+                    countryCode: e.target.value,
+                  }))
+                }
+                className="px-[1.2rem] py-[1rem] rounded-[1rem] text-[1.3rem] font-medium text-textPrimary bg-[#2a2b32] focus:outline-none"
+              >
+                <option value="+91">India (+91)</option>
+                <option value="+1">USA (+1)</option>
+                <option value="+44">UK (+44)</option>
+                <option value="+61">Australia (+61)</option>
+                <option value="+81">Japan (+81)</option>
+              </select>
+
               <TextInput
                 value={payload.mobile}
                 onChange={(e) =>
@@ -199,11 +203,9 @@ const AuthRegisterForm = () => {
               onChange={(e) =>
                 setPayload((prev) => ({ ...prev, password: e.target.value }))
               }
-              placeholder=" Create Password"
+              placeholder="Create Password"
               className="!bg-[#2b2e39]"
-              // labelName="Password*"
             />
-
             <TextInput
               type="password"
               value={payload.password}
@@ -212,10 +214,8 @@ const AuthRegisterForm = () => {
               }
               placeholder="Enter Confirm Password"
               className="!bg-[#2b2e39]"
-              // labelName="Password*"
             />
 
-            {/* Checkbox */}
             <div className="flex items-center space-x-2">
               <input type="checkbox" id="adult" className="accent-green-500" />
               <label
@@ -225,15 +225,6 @@ const AuthRegisterForm = () => {
                 I am an adult
               </label>
             </div>
-
-            {/* <TextInput
-    value={payload.referredBy}
-    onChange={(e) =>
-      setPayload((prev) => ({ ...prev, referredBy: e.target.value }))
-    }
-    placeholder="Optional"
-    // labelName="Referral Code"
-  /> */}
           </div>
 
           <div className="btns w-full mt-4">
@@ -244,11 +235,11 @@ const AuthRegisterForm = () => {
               className="!bg-green-500"
             />
           </div>
-
         </div>
-          <span className="accontTggle  ">
-            Already have an account? <Link to={AuthRoutes.LOGIN}>Sign in</Link>
-          </span>
+
+        <span className="accontTggle">
+          Already have an account? <Link to={AuthRoutes.LOGIN}>Sign in</Link>
+        </span>
       </div>
     </>
   );

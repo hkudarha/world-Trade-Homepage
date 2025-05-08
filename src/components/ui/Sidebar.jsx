@@ -81,8 +81,8 @@ const Sidebar = () => {
           <Link to={AuthenticatedRoutes.USER_DASHBOARD} className="nav-logo">
            
             <div className="flex items-center w-1/3 mt-10">
-                      <img src={logo} alt="T_image" className="w-[6rem] absolute" />
-                      <img src={logo2} alt="Rade" className="w-[19rem] mt-4 ml-[3.5rem]" />
+                      <img src={logo} alt="T_image" className="w-[6rem] " />
+                      <img src={logo2} alt="Rade" className="w-64 ml-[-2rem] mt-4 " />
                     </div>
           </Link>
 
