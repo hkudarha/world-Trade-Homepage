@@ -6,11 +6,11 @@ import "../styles/DashboardMain.css";
 const DashboardMain = ({ inner, name }) => {
   return (
     <>
-      <div className="AuthMain1 !bg-transparent">
-         <video autoPlay loop muted playsInline>
+      <div className="AuthMain1 bg-[#141518]">
+         {/* <video autoPlay loop muted playsInline>
                   <source src={bgVideo} type="video/mp4" />
                   Your browser does not support the video tag.
-                </video>
+                </video> */}
         <div className="DashboardMain">
         <Sidebar />
         

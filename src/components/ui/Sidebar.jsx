@@ -8,7 +8,8 @@ import { AuthenticatedRoutes } from "../../constants/Routes";
 import { RiLogoutCircleRLine } from "react-icons/ri";
 import { Accordion } from "react-bootstrap";
 import { FaCaretRight } from "react-icons/fa";
-import navLogo from '../../assets/website/worldTrade.png'
+import logo from "../../assets/trade_logo.png";
+import logo2 from "../../assets/rade.png";
 
 const Sidebar = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
@@ -78,11 +79,11 @@ const Sidebar = () => {
       <nav className="nav">
         <div>
           <Link to={AuthenticatedRoutes.USER_DASHBOARD} className="nav-logo">
-            <img
-              src={navLogo}
-              alt="logo"
-              className="nav-logo-icon"
-            />
+           
+            <div className="flex items-center w-1/3 mt-10">
+                      <img src={logo} alt="T_image" className="w-[6rem] absolute" />
+                      <img src={logo2} alt="Rade" className="w-[19rem] mt-4 ml-[3.5rem]" />
+                    </div>
           </Link>
 
           <div className="nav-toggle" id="nav-toggle" onClick={toggleSidebar}>

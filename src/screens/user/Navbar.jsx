@@ -32,14 +32,14 @@ const Navbar = () => {
             borderRadius: "1.10438rem",
             background: "rgba(16, 22, 22, 0.50)",
             boxShadow: `
-      0px -16.934px 18.407px 0px rgba(255, 255, 255, 0.10) inset,
-      0px -26.505px 22.088px 0px rgba(0, 0, 0, 0.15) inset,
-      0px -58.165px 29.451px 0px rgba(0, 0, 0, 0.10) inset,
-      0px 1.473px 0.736px 0px rgba(0, 0, 0, 0.06),
-      0px 2.945px 1.473px 0px rgba(0, 0, 0, 0.09),
-      0px 5.89px 2.945px 0px rgba(0, 0, 0, 0.09),
-      0px 11.78px 5.89px 0px rgba(0, 0, 0, 0.09),
-      0px 23.56px 11.78px 0px rgba(0, 0, 0, 0.09)
+              0px -16.934px 18.407px 0px rgba(255, 255, 255, 0.10) inset,
+              0px -26.505px 22.088px 0px rgba(0, 0, 0, 0.15) inset,
+              0px -58.165px 29.451px 0px rgba(0, 0, 0, 0.10) inset,
+              0px 1.473px 0.736px 0px rgba(0, 0, 0, 0.06),
+              0px 2.945px 1.473px 0px rgba(0, 0, 0, 0.09),
+              0px 5.89px 2.945px 0px rgba(0, 0, 0, 0.09),
+              0px 11.78px 5.89px 0px rgba(0, 0, 0, 0.09),
+              0px 23.56px 11.78px 0px rgba(0, 0, 0, 0.09)
     `,
           }}
         >
