@@ -337,11 +337,13 @@
 .p-column-filter.p-inputtext {
     padding: 1rem 1.4rem;
     border-radius: 1rem;
-    border: 1px solid var(--text-secondary);
+    /* border: 1px solid var(--text-secondary); */
     /* background-color: transparent; */
     color: var(--text-primary);
-    font-size: 1.6rem;
+    font-size: 1.5rem;
     font-weight: 500;
+    background-color: #2a2b32;
+    color: white;
 }
 
 .inputFieldBox textarea {
@@ -367,7 +369,7 @@
     width: 100%;
     display: flex;
     column-gap: 2%;
-    row-gap: 2rem;
+    row-gap: 1rem;
     flex-wrap: wrap;
 }
 

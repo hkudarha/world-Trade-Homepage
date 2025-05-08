@@ -7,10 +7,7 @@ import { AuthenticatedRoutes, AuthRoutes } from "../../constants/Routes";
 import PageLoader from "../ui/PageLoader";
 import { SwalError, SwalSuccess } from "../../utils/custom-alert";
 import { loginWithUserIDApi } from "../../api/auth-api"; // API call wahi rahega, bas payload email-password ka jayega
-import {
-  emailValidator,
-  passwordValidator,
-} from "../../utils/inputValidator";
+import { emailValidator, passwordValidator } from "../../utils/inputValidator";
 import TextInputPassword from "../ui/TextInputPassword";
 import TextInput from "../ui/TextInput";
 
@@ -32,8 +29,6 @@ const AuthLoginForm = () => {
       formErrors.email = emailError;
       isValid = false;
     }
-
-    
 
     setErrors(formErrors);
     return isValid;
@@ -82,25 +77,34 @@ const AuthLoginForm = () => {
   return (
     <>
       {loading && <PageLoader />}
-      <div className="AuthLoginForm content">
-        <h5 className="main-heading" data-aos="fade-up">
-          Welcome Back
+      <div className="">
+        <h5
+          className="text-white text-center mx-auto text-[2.0945rem] font-semibold leading-none font-sofia"
+          data-aos="fade-up"
+        >
+          Welcome to{" "}
+          <span className="text-[#45C66F] font-semibold text-[2.0945rem] leading-none font-sofia">
+            1 Trade
+          </span>
         </h5>
-        <p data-aos="fade-up">
-          Today is a new day. It's your day. You shape it. Sign in to start managing your projects.
-        </p>
-        <div data-aos="fade-up" className="input-container">
+
+        <div
+          data-aos="fade-up"
+          className="input-container justify-center flex-col items-center  bg-[#25272D] p-10 my-10 rounded-[1.875rem] shadow-[0px_4px_4px_rgba(0,0,0,0.25)] backdrop-blur-[4px]"
+        >
           <TextInput
             onChange={(e) =>
               setLoginPayload({
                 ...loginPayload,
                 email: e.target.value,
               })
+              
             }
             value={loginPayload.email}
-            placeholder="Enter your Email"
-            labelName="Email"
+            placeholder="Email / Username"
+            // labelName=""
             error={errors.email}
+            className="rounded-md border-2 border-[#313132] bg-[#2A2D37] opacity-80"
           />
           <TextInputPassword
             value={loginPayload.password}
@@ -110,19 +114,34 @@ const AuthLoginForm = () => {
                 password: e.target.value,
               })
             }
-            placeholder="Enter your Password"
-            labelName="Password"
+            placeholder="Password"
+            // labelName="Password"
             error={errors.password}
           />
+
+            {/* Checkbox */}
+        <div className="flex items-center justify-start  space-x-2">
+          <input type="checkbox" id="adult" className="accent-green-500 " />
+          <label htmlFor="adult" className="text-lg !text-start font-semibold text-white">
+          Remember me
+          </label>
+        </div>
+
           <Button2
             onClick={handleLoginSubmit}
-            name="Sign In"
+            name="SIGN IN"
             disabled={loading}
+            className="!bg-[#45C66F]"
           />
         </div>
-        <span data-aos="fade-up" className="accontTggle">
-          Don't have an account?{" "}
-          <Link to={AuthRoutes.REGISTER}>Sign up</Link>
+        <span data-aos="fade-up" className="accontTggle text-white  text-[1.125rem] font-semibold leading-none font-sofia text-center">
+          Not a member?  &nbsp;&nbsp;
+          <Link
+            to={AuthRoutes.REGISTER}
+            className="text-[#45C66F] text-[1.125rem] font-semibold leading-none font-sofia"
+          >
+            Sign up
+          </Link>
         </span>
       </div>
     </>

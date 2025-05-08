@@ -17,8 +17,10 @@ const AuthRegisterForm = () => {
   const [payload, setPayload] = useState({
     name: "",
     email: "",
+    mobile: "",
     password: "",
     referredBy: "",
+    lastname: "",
   });
 
   const [loading, setLoading] = useState(false);
@@ -40,12 +42,15 @@ const AuthRegisterForm = () => {
       setLoading(true);
 
       // ✅ Register user
-   const response = await registerUser({
-  name: payload.name,
-  email: payload.email.trim().toLowerCase(),
-  password: payload.password.trim(),
-  referredBy: payload.referredBy?.trim(), // Optional chaining if referredBy might be undefined
-});
+      const response = await registerUser({
+        name: payload.name,
+        lastname: payload.lastname,
+
+        mobile: payload.mobile,
+        email: payload.email.trim().toLowerCase(),
+        password: payload.password.trim(),
+        referredBy: payload.referredBy?.trim(), // Optional chaining if referredBy might be undefined
+      });
 
       // ✅ OTP sent message
       await Swal.fire({
@@ -108,12 +113,13 @@ const AuthRegisterForm = () => {
           SwalError.fire({
             icon: "error",
             title: "Invalid OTP",
-            text: otpError?.response?.data?.message || "OTP is incorrect, please try again.",
+            text:
+              otpError?.response?.data?.message ||
+              "OTP is incorrect, please try again.",
           });
           // Loop continues
         }
       }
-
     } catch (error) {
       console.error(error);
       SwalError.fire({
@@ -129,60 +135,120 @@ const AuthRegisterForm = () => {
   return (
     <>
       {loading && <PageLoader />}
-      <div className="AuthLoginForm content">
-        <h5 className="main-heading" data-aos="fade-up">
-          Welcome
+      <div className="mx-auto">
+      <h5
+          className="text-white text-center my-[3rem]  mx-auto text-[2.0945rem] font-semibold leading-none font-sofia"
+          data-aos="fade-up"
+        >
+          Welcome to{" "}
+          <span className="text-[#45C66F] font-semibold text-[2.0945rem] leading-none font-sofia">
+            1 Trade
+          </span>
         </h5>
-        <p data-aos="fade-up">
+        {/* <p data-aos="fade-up">
           Today is a new day. It's your day. You shape it. Sign up to start
           managing your projects.
-        </p>
+        </p> */}
 
-        <div className="input-container">
-          <TextInput
-            value={payload.name}
-            onChange={(e) => setPayload((prev) => ({ ...prev, name: e.target.value }))}
-            placeholder="Enter your name"
-            labelName="Name*"
-          />
+        <div className="bg-[#1e1f26] mx-auto p-4 rounded-[2rem] mb-20">
+          <p className="text-center text-[1.5rem]">Enter Account Details</p>
 
-          <TextInput
-            value={payload.email}
-            onChange={(e) => setPayload((prev) => ({ ...prev, email: e.target.value }))}
-            placeholder="Enter your email"
-            labelName="Email*"
-          />
+          <div className="input-container">
+            <TextInput
+              value={payload.name}
+              onChange={(e) =>
+                setPayload((prev) => ({ ...prev, name: e.target.value }))
+              }
+              placeholder="Enter First Name"
+              // labelName="Name*"
+            />
+            <TextInput
+              value={payload.lastname}
+              onChange={(e) =>
+                setPayload((prev) => ({ ...prev, name: e.target.value }))
+              }
+              placeholder="Enter Last Name"
+              // labelName=" Last Name*"
+            />
 
-          <TextInput
-            type="password"
-            value={payload.password}
-            onChange={(e) => setPayload((prev) => ({ ...prev, password: e.target.value }))}
-            placeholder="Enter your password"
-            labelName="Password*"
-          />
+            <TextInput
+              value={payload.email}
+              onChange={(e) =>
+                setPayload((prev) => ({ ...prev, email: e.target.value }))
+              }
+              placeholder="Enter Email"
+              // labelName="Email*"
+            />
+            <div className="flex gap-3 justify-center items-center bg-[#1e1f26] rounded-md">
+              <span className=" px-[1.2rem] py-[1rem] rounded-[1rem] text-[1.3rem] font-medium text-textPrimary bg-[#2a2b32]">
+                +91
+              </span>
+              <TextInput
+                value={payload.mobile}
+                onChange={(e) =>
+                  setPayload((prev) => ({ ...prev, mobile: e.target.value }))
+                }
+                placeholder="Enter Mobile Number"
+                className="!w-[29.5rem]"
+              />
+            </div>
 
-          <TextInput
-            value={payload.referredBy}
-            onChange={(e) =>
-              setPayload((prev) => ({ ...prev, referredBy: e.target.value }))
-            }
-            placeholder="Optional"
-            labelName="Referral Code"
-          />
+            <TextInput
+              type="password"
+              value={payload.password}
+              onChange={(e) =>
+                setPayload((prev) => ({ ...prev, password: e.target.value }))
+              }
+              placeholder=" Create Password"
+              className="!bg-[#2b2e39]"
+              // labelName="Password*"
+            />
+
+            <TextInput
+              type="password"
+              value={payload.password}
+              onChange={(e) =>
+                setPayload((prev) => ({ ...prev, password: e.target.value }))
+              }
+              placeholder="Enter Confirm Password"
+              className="!bg-[#2b2e39]"
+              // labelName="Password*"
+            />
+
+            {/* Checkbox */}
+            <div className="flex items-center space-x-2">
+              <input type="checkbox" id="adult" className="accent-green-500" />
+              <label
+                htmlFor="adult"
+                className="text-lg font-semibold text-white"
+              >
+                I am an adult
+              </label>
+            </div>
+
+            {/* <TextInput
+    value={payload.referredBy}
+    onChange={(e) =>
+      setPayload((prev) => ({ ...prev, referredBy: e.target.value }))
+    }
+    placeholder="Optional"
+    // labelName="Referral Code"
+  /> */}
+          </div>
+
+          <div className="btns w-full mt-4">
+            <Button2
+              onClick={handleSubmit}
+              name={"Register"}
+              disabled={loading}
+              className="!bg-green-500"
+            />
+          </div>
+
         </div>
-
-        <div data-aos="fade-up" className="btns">
-          <Button2
-            onClick={handleSubmit}
-            name={"Register"}
-            disabled={loading}
-          />
-        </div>
-
-        <span data-aos="fade-up" className="accontTggle">
-          Already have an account?{" "}
-          <Link to={AuthRoutes.LOGIN}>Sign in</Link>
-        </span>
+          <span className="accontTggle  ">
+            Already have an account? <Link to={AuthRoutes.LOGIN}>Sign in</Link>
+          </span>
       </div>
     </>
   );

@@ -29,6 +29,7 @@ export const Button2 = ({ className, name, dataAos, onClick, disabled, type }) =
       disabled={disabled}
       className={`Button2 ${className}`}
       type={type}
+      
     >
       {name}
     </button>
